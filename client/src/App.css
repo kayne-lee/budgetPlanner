@@ -1,38 +1,103 @@
-.App {
-  text-align: center;
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 60px)
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.form {
+  --bg-light: #efefef;
+  --bg-dark: #707070;
+  --clr: #58bc82;
+  --clr-alpha: #9c9c9c60;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 1rem;
+  width: 100%;
+  max-width: 300px;
 }
 
-.App-link {
-  color: #61dafb;
+.form .input-span {
+width: 100%;
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.form input[type="email"],
+.form input[type="username"],
+.form input[type="password"] {
+box-sizing: border-box;
+border-radius: 0.5rem;
+padding: 1rem 0.75rem;
+width: 100%;
+border: none;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+background-color: var(--clr-alpha);
+outline: 2px solid var(--bg-dark);
+}
+
+.form input[type="email"]:focus,
+.form input[type="username"]:focus,
+.form input[type="password"]:focus {
+outline: 2px solid var(--clr);
+}
+
+.label {
+align-self: flex-start;
+color: var(--clr);
+font-weight: 600;
+}
+
+.form .submit {
+padding: 1rem 0.75rem;
+width: 100%;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+border-radius: 3rem;
+background-color: var(--bg-dark);
+color: var(--bg-light);
+border: none;
+cursor: pointer;
+transition: all 300ms;
+font-weight: 600;
+font-size: 0.9rem;
+}
+
+.form .submit:hover {
+background-color: var(--clr);
+color: var(--bg-dark);
+}
+
+.span {
+text-decoration: none;
+color: var(--bg-dark);
+}
+
+.link  {
+color: var(--clr);
+}
+
+/* Message styling */
+.message {
+margin-bottom: 1rem; /* Space above the submit button */
+padding: 0.5rem;
+border-radius: 0.5rem;
+text-align: center;
+font-weight: bold;
+}
+
+.message.success {
+background-color: #d4edda;
+color: #155724;
+}
+
+.message.error {
+background-color: #f8d7da;
+color: #721c24;
 }
