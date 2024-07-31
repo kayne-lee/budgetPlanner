@@ -1,0 +1,15 @@
+.dropdown {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    z-index: 1;
+}
+
+.dropdown div {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.dropdown div:hover {
+    background-color: #f0f0f0;
+}

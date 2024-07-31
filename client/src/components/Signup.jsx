@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
@@ -34,7 +34,7 @@ export default function Signup() {
   }
 
   return (
-    <Fragment>
+    <div className="center">
       <form className="form" onSubmit={handleSubmit}>
         {message && (
             <div className={`message ${messageType}`}>
@@ -77,6 +77,6 @@ export default function Signup() {
         <input className="submit" type="submit" value="Sign up"></input>
         <span className="span">Already have an account? <Link to="/" className="link">Log in</Link></span>
       </form>
-    </Fragment>
+    </div>
   )
 }

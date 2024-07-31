@@ -1,6 +1,5 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import '../App.css'
 
 export default function Login() {
@@ -42,7 +41,7 @@ export default function Login() {
       
       
   return (
-    <Fragment>
+    <div className="center">
       <form className="form" onSubmit={handleSubmit}>
         {message && (
             <div className={`message ${messageType}`}>
@@ -74,6 +73,6 @@ export default function Login() {
         <input className="submit" type="submit" value="Log in"></input>
         <span className="span">Don't have an account <Link to="/signup" className="link">Sign up</Link></span>
       </form>
-    </Fragment>
+    </div>
   )
 }

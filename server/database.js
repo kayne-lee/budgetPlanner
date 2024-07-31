@@ -9,14 +9,16 @@ const pool = new Pool({
     
 })
 // code to add a new table to the database
-// CREATE TABLE IF NOT EXISTS users (
-//     id SERIAL PRIMARY KEY,
-//     username VARCHAR(50) UNIQUE NOT NULL,
-//     password VARCHAR(255) NOT NULL
-// );
+
 // const adjust = `
-//     ALTER TABLE users
-// ADD COLUMN email VARCHAR(100) UNIQUE NOT NULL;
+// CREATE TABLE user_transactions (
+//     id SERIAL PRIMARY KEY,
+//     user_id INTEGER REFERENCES users(id),
+//     category VARCHAR(50),
+//     type VARCHAR(50),
+//     amount DECIMAL(10, 2),
+//     transaction_date DATE
+// );
 // `;
 
 // pool
