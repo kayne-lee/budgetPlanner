@@ -1,0 +1,28 @@
+table {
+    background: #316346;
+    border-radius: 0.25em;
+    border-collapse: collapse;
+  }
+  th {
+    border-bottom: 1px solid #afcdbc;
+    color: #fff;
+    font-size: 0.85em;
+    font-weight: 600;
+    padding: 0.5em 1em;
+    text-align: left;
+  }
+  td {
+    color: #fff;
+    font-weight: 400;
+    padding: 0.65em 1em;
+  }
+
+  tbody tr {
+    transition: background 0.25s ease;
+  }
+  tbody tr:hover {
+    background: #58bc82;
+  }
+  h3 {
+    font-size: 13px;
+  }

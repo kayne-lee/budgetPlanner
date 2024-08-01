@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import "../styles/financialDashboard.css"
 
 const FinancialDashboard = ({ selectedMonth, selectedYear }) => {
   const [incomeData, setIncomeData] = useState([]);
@@ -78,8 +79,6 @@ const FinancialDashboard = ({ selectedMonth, selectedYear }) => {
 
   return (
     <div>
-      <h2>Financial Dashboard</h2>
-      
       <h3>Income</h3>
       <table>
         <thead>
