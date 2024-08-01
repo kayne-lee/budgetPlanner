@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 
-const Income = () => {
+const Income = ({ selectedMonth, selectedYear }) => {
   const [data, setData] = useState([["Type", "Total Amount"]]); // Include headers for the chart
 
   useEffect(() => {
     const fetchIncomeData = async () => {
       const token = localStorage.getItem("authToken");
-      const response = await fetch("http://localhost:4000/getIncomeData", {
+      const response = await fetch(`http://localhost:4000/getIncomeData?month=${selectedMonth}&year=${selectedYear}`, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -25,8 +25,10 @@ const Income = () => {
       }
     };
 
-    fetchIncomeData();
-  }, []);
+    if (selectedMonth && selectedYear) {
+      fetchIncomeData();
+    }
+  }, [selectedMonth, selectedYear]); // Fetch data whenever selectedMonth or selectedYear changes
 
   const options = {
     title: "Income Sources",
@@ -38,7 +40,7 @@ const Income = () => {
         chartType="PieChart"
         data={data}
         options={options}
-        width={"300px"}
+        width={"800px"}
         height={"200px"}
       />
     </div>
