@@ -23,7 +23,7 @@ app.post("/login", async (req, res) => {
             const user = result.rows[0];
             const match = await bcrypt.compare(password, user.password); // Compare hashed passwords
             if (match) {
-                const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '1h' });
+                const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '3h' });
                 res.json({ message: "Login successful", token, username: user.username, userId: user.userId });
             } else {
                 res.status(400).json({ error: "Invalid email or password" });
@@ -92,74 +92,68 @@ app.post("/addTransaction", authenticateToken, async (req, res) => {
 });
 
 app.get("/getIncomeData", authenticateToken, async (req, res) => {
-    const userId = req.user.userId; // Assuming userId is stored in the token
+  const userId = req.user.userId; // Assuming userId is stored in the token
+  const { month, year } = req.query;
 
-    try {
-        const query = `
-            SELECT type, SUM(amount) as total_amount
-            FROM user_transactions
-            WHERE user_id = $1 AND category = 'Income'
-            GROUP BY type
-        `;
-        const result = await pool.query(query, [userId]);
-        res.json(result.rows);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Internal server error" });
-    }
+  try {
+    const query = `
+      SELECT type, SUM(amount) as total_amount
+      FROM user_transactions
+      WHERE user_id = $1 AND category = 'Income' AND
+      EXTRACT(MONTH FROM transaction_date) = $2 AND
+      EXTRACT(YEAR FROM transaction_date) = $3
+      GROUP BY type
+    `;
+    const result = await pool.query(query, [userId, month, year]);
+    res.json(result.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
-// Endpoint to get spendings data
 app.get("/getSpendingsData", authenticateToken, async (req, res) => {
-    const userId = req.user.userId; // Assuming userId is stored in the token
-    try {
-      const result = await pool.query(
-        "SELECT type, SUM(amount) AS total_amount FROM user_transactions WHERE category = 'Spendings' AND user_id = $1 GROUP BY type",
-        [userId]
-      );
-      res.json(result.rows);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
-  });
+  const userId = req.user.userId; // Assuming userId is stored in the token
+  const { month, year } = req.query;
 
-  app.get("/getSavingsData", authenticateToken, async (req, res) => {
-    const userId = req.user.userId; // Assuming userId is stored in the token
-    try {
-      const result = await pool.query(
-        "SELECT type, SUM(amount) AS total_amount FROM user_transactions WHERE category = 'Savings' AND user_id = $1 GROUP BY type",
-        [userId]
-      );
-      res.json(result.rows);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
-  });
+  try {
+    const query = `
+      SELECT type, SUM(amount) as total_amount
+      FROM user_transactions
+      WHERE user_id = $1 AND category = 'Spendings' AND
+      EXTRACT(MONTH FROM transaction_date) = $2 AND
+      EXTRACT(YEAR FROM transaction_date) = $3
+      GROUP BY type
+    `;
+    const result = await pool.query(query, [userId, month, year]);
+    res.json(result.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
-  app.get('/getMonthlyData', async (req, res) => {
-    try {
-      // Decode the token to get the user ID (assuming you use JWT)
-      const userId = req.user.userId;
-  
-      const result = await pool.query(`
-        SELECT
-          DATE_TRUNC('month', transaction_date) AS month,
-          category,
-          SUM(amount) AS total_amount
-        FROM transactions
-        WHERE user_id = $1 AND transaction_date >= NOW() - INTERVAL '12 months'
-        GROUP BY month, category
-        ORDER BY month DESC
-      `, [userId]);
-  
-      res.json(result.rows);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Server Error');
-    }
-  });
+app.get("/getSavingsData", authenticateToken, async (req, res) => {
+  const userId = req.user.userId; // Assuming userId is stored in the token
+  const { month, year } = req.query;
+
+  try {
+    const query = `
+      SELECT type, SUM(amount) as total_amount
+      FROM user_transactions
+      WHERE user_id = $1 AND category = 'Savings' AND
+      EXTRACT(MONTH FROM transaction_date) = $2 AND
+      EXTRACT(YEAR FROM transaction_date) = $3
+      GROUP BY type
+    `;
+    const result = await pool.query(query, [userId, month, year]);
+    res.json(result.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 
 
 app.listen(4000, () => console.log("Server on localhost:4000"))
