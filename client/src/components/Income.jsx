@@ -8,7 +8,7 @@ const Income = ({ selectedMonth, selectedYear }) => {
     const fetchIncomeData = async () => {
       const userId = localStorage.getItem("userId"); // Get the user ID from local storage
 
-      const response = await fetch(`http://localhost:4000/getIncomeData?month=${selectedMonth}&year=${selectedYear}&user_id=${userId}`, {
+      const response = await fetch(`https://budgetplanner-v9zo.onrender.com/getIncomeData?month=${selectedMonth}&year=${selectedYear}&user_id=${userId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

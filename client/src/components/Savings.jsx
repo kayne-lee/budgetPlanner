@@ -7,7 +7,7 @@ const Savings = ({ selectedMonth, selectedYear }) => {
   useEffect(() => {
     const fetchSavingsData = async () => {
       const userId = localStorage.getItem("userId");
-      const response = await fetch(`http://localhost:4000/getSavingsData?month=${selectedMonth}&year=${selectedYear}&user_id=${userId}`, {
+      const response = await fetch(`https://budgetplanner-v9zo.onrender.com/getSavingsData?month=${selectedMonth}&year=${selectedYear}&user_id=${userId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

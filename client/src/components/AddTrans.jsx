@@ -19,7 +19,7 @@ const AddTransactionForm = () => {
         
         const user_id = localStorage.getItem("userId"); // Get userId from localStorage
 
-        const response = await fetch("http://localhost:4000/addTransaction", {
+        const response = await fetch("https://budgetplanner-v9zo.onrender.com/addTransaction", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

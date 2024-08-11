@@ -13,7 +13,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-          const response = await axios.post('http://localhost:4000/adduser', {
+          const response = await axios.post('https://budgetplanner-v9zo.onrender.com/adduser', {
               email,
               username,
               password,

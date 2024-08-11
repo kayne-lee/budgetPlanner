@@ -10,7 +10,7 @@ const FinancialDashboard = ({ selectedMonth, selectedYear }) => {
     const fetchData = async () => {
       const userId = localStorage.getItem("userId");
       const incomeResponse = await fetch(
-        `http://localhost:4000/getIncomeData?month=${selectedMonth}&year=${selectedYear}&user_id=${userId}`,
+        `https://budgetplanner-v9zo.onrender.com/getIncomeData?month=${selectedMonth}&year=${selectedYear}&user_id=${userId}`,
         {
           method: 'GET',
           headers: {
@@ -20,7 +20,7 @@ const FinancialDashboard = ({ selectedMonth, selectedYear }) => {
       );
 
       const spendingsResponse = await fetch(
-        `http://localhost:4000/getSpendingsData?month=${selectedMonth}&year=${selectedYear}&user_id=${userId}`,
+        `https://budgetplanner-v9zo.onrender.com/getSpendingsData?month=${selectedMonth}&year=${selectedYear}&user_id=${userId}`,
         {
           method: 'GET',
           headers: {
@@ -30,7 +30,7 @@ const FinancialDashboard = ({ selectedMonth, selectedYear }) => {
       );
 
       const savingsResponse = await fetch(
-        `http://localhost:4000/getSavingsData?month=${selectedMonth}&year=${selectedYear}&user_id=${userId}`,
+        `https://budgetplanner-v9zo.onrender.com/getSavingsData?month=${selectedMonth}&year=${selectedYear}&user_id=${userId}`,
         {
           method: 'GET',
           headers: {
