@@ -61,21 +61,8 @@ app.post("/adduser", async (req, res) => {
         return res.status(400).json({ error: error.message });
     }
     console.log(user)
-    res.status(201).json({ message: "User created successfully", user });
+    res.status(201).json({ message: "User created successfully", user: user });
 });
-
-const authenticateToken = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-
-    if (token == null) return res.sendStatus(401);
-
-    jwt.verify(token, JWT_SECRET, (err, user) => {
-        if (err) return res.sendStatus(403);
-        req.user = user;
-        next();
-    });
-};
 
 app.post("/addTransaction", async (req, res) => {
     const { data, error } = await supabase
