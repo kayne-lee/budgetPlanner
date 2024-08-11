@@ -11,12 +11,14 @@ const Header = () => {
   };
 
   return (
-    <div className="header">
-      <div>Budget Planner</div>
+      <>
       {localStorage.getItem("authToken") && (
+        <div className="header">
+          <img src="logo.png" alt="" className="logo1"/>
           <button onClick={handleLogout}>Sign Out</button>
+        </div>
         )}
-    </div>
+        </>
   );
 };
 

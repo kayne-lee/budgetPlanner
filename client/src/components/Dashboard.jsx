@@ -23,9 +23,9 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
+    <div className="dashboard">
       <AddTransactionForm />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="select">
         <select value={month} onChange={handleMonthChange}>
           {Array.from({ length: 12 }, (_, i) => (
             <option key={i} value={i + 1}>
@@ -41,7 +41,7 @@ const Dashboard = () => {
             </option>
           ))}
         </select>
-        <button type="submit">Submit</button>
+        <button type="submit" className="button">Submit</button>
       </form>
       <div className="data">
         <div className="graph">

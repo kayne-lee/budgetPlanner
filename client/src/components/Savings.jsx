@@ -18,8 +18,6 @@ const Savings = ({ selectedMonth, selectedYear }) => {
         const result = await response.json();
         const chartData = result.map(item => [item.type, parseFloat(item.total_amount)]); // Ensure total_amount is a float
 
-        console.log("Fetched savings data:", chartData);
-
         // Clear previous data and append new data
         setData([["Type", "Total Amount"], ...chartData]);
       }

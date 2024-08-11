@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "../styles/addTrans.css"
 
 const AddTransactionForm = () => {
     const [category, setCategory] = useState('Income');
@@ -41,7 +42,7 @@ const AddTransactionForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="add">
             <select value={category} onChange={(e) => {
                 setCategory(e.target.value);
                 setType(''); // Reset type when category changes
@@ -61,7 +62,7 @@ const AddTransactionForm = () => {
             <input type="number" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} required />
             <input type="date" value={transactionDate} onChange={(e) => setTransactionDate(e.target.value)} required />
             <input type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
-            <button type="submit">Add Transaction</button>
+            <button type="submit" className="button">Add Transaction</button>
         </form>
     );
 };

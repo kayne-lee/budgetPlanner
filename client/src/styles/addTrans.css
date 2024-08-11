@@ -13,3 +13,16 @@
 .dropdown div:hover {
     background-color: #f0f0f0;
 }
+
+.add {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.button {
+    background-color: #58bc82;
+}
+.button:hover {
+    background-color: #316346;
+}

@@ -42,6 +42,7 @@ export default function Login() {
       
   return (
     <div className="center">
+      <img src="logo.png" alt="" width={200}/>
       <form className="form" onSubmit={handleSubmit}>
         {message && (
             <div className={`message ${messageType}`}>

@@ -1,11 +1,14 @@
 .app {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 90px);
   width: 100%;
+  background-color: white;
 }
 .center {
+  margin-top: 200px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -17,7 +20,6 @@
   --clr-alpha: #9c9c9c60;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 1rem;
   width: 1000px;

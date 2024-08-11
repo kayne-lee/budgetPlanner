@@ -10,6 +10,8 @@ import PrivateRoute from './components/PrivateRoute'; // Ensure you import Priva
 function App() {
   return (
     <Router>
+      <div>
+
       <Header />
       <div className="app">
         <Routes>
@@ -18,6 +20,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
         </Routes>
+      </div>
       </div>
     </Router>
   );

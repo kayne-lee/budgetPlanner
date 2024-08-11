@@ -2,6 +2,7 @@ table {
     background: #316346;
     border-radius: 0.25em;
     border-collapse: collapse;
+    width: 451px;
   }
   th {
     border-bottom: 1px solid #afcdbc;
@@ -15,6 +16,7 @@ table {
     color: #fff;
     font-weight: 400;
     padding: 0.65em 1em;
+    width: 60px;
   }
 
   tbody tr {
