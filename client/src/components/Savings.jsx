@@ -6,17 +6,17 @@ const Savings = ({ selectedMonth, selectedYear }) => {
 
   useEffect(() => {
     const fetchSavingsData = async () => {
-      const token = localStorage.getItem("authToken");
-      const response = await fetch(`http://localhost:4000/getSavingsData?month=${selectedMonth}&year=${selectedYear}`, {
+      const userId = localStorage.getItem("userId");
+      const response = await fetch(`http://localhost:4000/getSavingsData?month=${selectedMonth}&year=${selectedYear}&user_id=${userId}`, {
         method: "GET",
         headers: {
-          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
       });
 
       if (response.ok) {
         const result = await response.json();
-        const chartData = result.map(item => [item.type, parseFloat(item.total_amount)]); // Ensure total_amount is a float
+        const chartData = result.map(item => [item.transaction_type, parseFloat(item.total_amount)]); // Ensure total_amount is a float
 
         // Clear previous data and append new data
         setData([["Type", "Total Amount"], ...chartData]);

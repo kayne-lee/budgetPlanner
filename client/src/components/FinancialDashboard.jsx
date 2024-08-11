@@ -8,34 +8,33 @@ const FinancialDashboard = ({ selectedMonth, selectedYear }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem('authToken');
-
+      const userId = localStorage.getItem("userId");
       const incomeResponse = await fetch(
-        `http://localhost:4000/getIncomeData?month=${selectedMonth}&year=${selectedYear}`,
+        `http://localhost:4000/getIncomeData?month=${selectedMonth}&year=${selectedYear}&user_id=${userId}`,
         {
           method: 'GET',
           headers: {
-            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         }
       );
 
       const spendingsResponse = await fetch(
-        `http://localhost:4000/getSpendingsData?month=${selectedMonth}&year=${selectedYear}`,
+        `http://localhost:4000/getSpendingsData?month=${selectedMonth}&year=${selectedYear}&user_id=${userId}`,
         {
           method: 'GET',
           headers: {
-            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         }
       );
 
       const savingsResponse = await fetch(
-        `http://localhost:4000/getSavingsData?month=${selectedMonth}&year=${selectedYear}`,
+        `http://localhost:4000/getSavingsData?month=${selectedMonth}&year=${selectedYear}&user_id=${userId}`,
         {
           method: 'GET',
           headers: {
-            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         }
       );
@@ -76,9 +75,8 @@ const FinancialDashboard = ({ selectedMonth, selectedYear }) => {
   const incomeTotals = calculateTotalAndPercentage(incomeData);
   const spendingsTotals = calculateTotalAndPercentage(spendingsData);
   const savingsTotals = calculateTotalAndPercentage(savingsData);
-
   return (
-    <div>
+    <div className="table-parent">
       <h3>Income</h3>
       <table>
         <thead>
@@ -92,7 +90,7 @@ const FinancialDashboard = ({ selectedMonth, selectedYear }) => {
         <tbody>
           {incomeTotals.dataWithPercentage.map((item, index) => (
             <tr key={index}>
-              <td>{item.type}</td>
+              <td>{item.transaction_type}</td>
               <td>{parseFloat(item.total_amount).toFixed(2)}</td>
               <td>{1}</td> {/* Assuming each type has one transaction for simplicity */}
               <td>{item.percentage} %</td>
@@ -120,7 +118,7 @@ const FinancialDashboard = ({ selectedMonth, selectedYear }) => {
         <tbody>
           {spendingsTotals.dataWithPercentage.map((item, index) => (
             <tr key={index}>
-              <td>{item.type}</td>
+              <td>{item.transaction_type}</td>
               <td>{parseFloat(item.total_amount).toFixed(2)}</td>
               <td>{1}</td>
               <td>{item.percentage} %</td>
@@ -148,7 +146,7 @@ const FinancialDashboard = ({ selectedMonth, selectedYear }) => {
         <tbody>
           {savingsTotals.dataWithPercentage.map((item, index) => (
             <tr key={index}>
-              <td>{item.type}</td>
+              <td>{item.transaction_type}</td>
               <td>{parseFloat(item.total_amount).toFixed(2)}</td>
               <td>{1}</td>
               <td>{item.percentage} %</td>

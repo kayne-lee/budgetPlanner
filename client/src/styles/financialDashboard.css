@@ -28,3 +28,6 @@ table {
   h3 {
     font-size: 13px;
   }
+  .table-parent {
+    margin-left: 50px;
+  }

@@ -23,8 +23,8 @@ export default function Login() {
       
           const data = await response.json();
           if (response.ok) {
-            localStorage.setItem("authToken", data.token);
-            localStorage.setItem("username", data.username); // Save username
+            console.log(data)
+            localStorage.setItem("userId", data.userId); // Save username
             navigate("/dashboard");
           } else {
             console.error(data.error);

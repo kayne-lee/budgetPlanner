@@ -6,20 +6,23 @@ const Income = ({ selectedMonth, selectedYear }) => {
 
   useEffect(() => {
     const fetchIncomeData = async () => {
-      const token = localStorage.getItem("authToken");
-      const response = await fetch(`http://localhost:4000/getIncomeData?month=${selectedMonth}&year=${selectedYear}`, {
+      const userId = localStorage.getItem("userId"); // Get the user ID from local storage
+
+      const response = await fetch(`http://localhost:4000/getIncomeData?month=${selectedMonth}&year=${selectedYear}&user_id=${userId}`, {
         method: "GET",
         headers: {
-          "Authorization": `Bearer ${token}`,
-        },
+          "Content-Type": "application/json",
+        }
       });
 
       if (response.ok) {
         const result = await response.json();
-        const chartData = result.map(item => [item.type, parseFloat(item.total_amount)]); // Ensure total_amount is a float
+        const chartData = result.map(item => [item.transaction_type, parseFloat(item.total_amount)]); // Ensure total_amount is a float
 
         // Clear previous data and append new data
         setData([["Type", "Total Amount"], ...chartData]);
+      } else {
+        console.error("Error fetching data:", response.statusText);
       }
     };
 

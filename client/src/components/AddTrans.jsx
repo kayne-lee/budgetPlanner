@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "../styles/addTrans.css"
+import "../styles/addTrans.css";
 
 const AddTransactionForm = () => {
     const [category, setCategory] = useState('Income');
@@ -16,18 +16,24 @@ const AddTransactionForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
-        const token = localStorage.getItem("authToken");
-    
+        
+        const user_id = localStorage.getItem("userId"); // Get userId from localStorage
+
         const response = await fetch("http://localhost:4000/addTransaction", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
             },
-            body: JSON.stringify({ category, type, amount, transaction_date: transactionDate, description }),
+            body: JSON.stringify({ 
+                user_id, // Include userId in the request body
+                category, 
+                type, 
+                amount, 
+                transaction_date: transactionDate, 
+                description 
+            }),
         });
-    
+
         if (response.ok) {
             // Reset the form
             setCategory('Income');

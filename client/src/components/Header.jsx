@@ -6,13 +6,14 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("authToken"); // Remove the token from localStorage
+    localStorage.removeItem("userId"); // Remove the token from localStorage
+    console.log(localStorage.getItem("userId"))
     navigate("/login"); // Redirect to login page
   };
 
   return (
       <>
-      {localStorage.getItem("authToken") && (
+      {localStorage.getItem("userId") && (
         <div className="header">
           <img src="logo.png" alt="" className="logo1"/>
           <button onClick={handleLogout}>Sign Out</button>
