@@ -105,6 +105,33 @@ const FinancialDashboard = ({ selectedMonth, selectedYear }) => {
         </tbody>
       </table>
 
+      <h3>Savings</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Total Amount</th>
+            <th>Total Transactions</th>
+            <th>Percentage</th>
+          </tr>
+        </thead>
+        <tbody>
+          {savingsTotals.dataWithPercentage.map((item, index) => (
+            <tr key={index}>
+              <td>{item.transaction_type}</td>
+              <td>{parseFloat(item.total_amount).toFixed(2)}</td>
+              <td>{1}</td>
+              <td>{item.percentage} %</td>
+            </tr>
+          ))}
+          <tr>
+            <td><strong>Total</strong></td>
+            <td>{parseFloat(savingsTotals.totalAmount).toFixed(2)}</td>
+            <td>{savingsTotals.totalTransactions}</td>
+            <td>100.00 %</td>
+          </tr>
+        </tbody>
+      </table>
       <h3>Spendings</h3>
       <table>
         <thead>
@@ -133,33 +160,6 @@ const FinancialDashboard = ({ selectedMonth, selectedYear }) => {
         </tbody>
       </table>
 
-      <h3>Savings</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Type</th>
-            <th>Total Amount</th>
-            <th>Total Transactions</th>
-            <th>Percentage</th>
-          </tr>
-        </thead>
-        <tbody>
-          {savingsTotals.dataWithPercentage.map((item, index) => (
-            <tr key={index}>
-              <td>{item.transaction_type}</td>
-              <td>{parseFloat(item.total_amount).toFixed(2)}</td>
-              <td>{1}</td>
-              <td>{item.percentage} %</td>
-            </tr>
-          ))}
-          <tr>
-            <td><strong>Total</strong></td>
-            <td>{parseFloat(savingsTotals.totalAmount).toFixed(2)}</td>
-            <td>{savingsTotals.totalTransactions}</td>
-            <td>100.00 %</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   );
 };

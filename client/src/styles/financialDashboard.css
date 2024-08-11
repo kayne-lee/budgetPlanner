@@ -7,13 +7,14 @@ table {
   th {
     border-bottom: 1px solid #afcdbc;
     color: #fff;
-    font-size: 0.85em;
+    font-size: 0.65em;
     font-weight: 600;
     padding: 0.5em 1em;
     text-align: left;
   }
   td {
     color: #fff;
+    font-size: 0.65em;
     font-weight: 400;
     padding: 0.65em 1em;
     width: 60px;
